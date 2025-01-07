@@ -33,10 +33,20 @@ body {
 
 #block {
     width: 450px;
-    height: 744px;
     background-color: #161616;
-    margin: 5px auto 45px auto;
     border-radius: 20px;
     border-top: 3px solid #4b2b8b;
     border-bottom: 3px solid #4b2b8b;
 }
+    .B1 {
+        height: 744px;
+        margin: 0px auto 50px auto;
+    }
+    .B2 {
+        height: 744px;
+        margin: 0px auto 50px auto;
+    }
+    .B3 {
+        height: 744px;
+        margin: 0px auto 0px auto;
+    }

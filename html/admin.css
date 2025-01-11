@@ -12,7 +12,7 @@ body {
     text-align: center;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
-    border-right: 3px solid #4b2b8b;
+    border-right: 3px solid #980000;
 }
     #a {
         font-size: 28px;
@@ -22,7 +22,7 @@ body {
             color: #4b2b8b;
         }
         .a2 {
-            color: gold;
+            color: #980000;
         }
         .a3 {
             color: #4b2b8b;
@@ -30,3 +30,22 @@ body {
         .a4 {
             color: #4b2b8b;
         }
+
+#block {
+    width: 450px;
+    background-color: #161616;
+    border-radius: 20px;
+    border-top: 3px solid #980000;
+    border-bottom: 3px solid #980000;
+}
+    .B1 {
+        height: 744px;
+        margin: 0px auto 0px auto;
+    }
+
+.images {
+    width: 450px;
+    height: 150px;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+}

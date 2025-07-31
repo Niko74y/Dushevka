@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выживание в дикой природе</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #game-container {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        #stats {
+            margin-bottom: 20px;
+        }
+        #actions {
+            margin-top: 20px;
+        }
+        button {
+            margin: 5px;
+            padding: 8px 16px;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1>Выживание в дикой природе</h1>
+        <div id="stats">
+            <p>Голод: <span id="hunger">50</span></p>
+            <p>Жажда: <span id="thirst">50</span></p>
+            <p>Усталость: <span id="fatigue">50</span></p>
+            <p>Здоровье: <span id="health">100</span></p>
+            <p>Дрова: <span id="wood">10</span></p>
+            <p>Камни: <span id="stones">5</span></p>
+            <p>Ягоды: <span id="berries">0</span></p>
+            <p>Рыба: <span id="fish">0</span></p>
+        </div>
+        <div id="narrative">
+            <p>Вы оказались на необитаемом острове после кораблекрушения. Ваша задача — выжить как можно дольше.</p>
+        </div>
+        <div id="actions">
+            <button onclick="gatherWood()">Собрать дрова</button>
+            <button onclick="gatherStones()">Собрать камни</button>
+            <button onclick="gatherBerries()">Собрать ягоды</button>
+            <button onclick="fish()">Ловить рыбу</button>
+            <button onclick="makeFire()">Развести костер</button>
+            <button onclick="rest()">Отдохнуть</button>
+            <button onclick="eatBerries()">Съесть ягоды</button>
+            <button onclick="eatFish()">Съесть рыбу</button>
+        </div>
+    </div>
+
+    <script>
+        let hunger = 50;
+        let thirst = 50;
+        let fatigue = 50;
+        let health = 100;
+        let wood = 10;
+        let stones = 5;
+        let berries = 0;
+        let fish = 0;
+
+        function updateStats() {
+            document.getElementById('hunger').textContent = hunger;
+            document.getElementById('thirst').textContent = thirst;
+            document.getElementById('fatigue').textContent = fatigue;
+            document.getElementById('health').textContent = health;
+            document.getElementById('wood').textContent = wood;
+            document.getElementById('stones').textContent = stones;
+            document.getElementById('berries').textContent = berries;
+            document.getElementById('fish').textContent = fish;
+        }
+
+        function gatherWood() {
+            wood += 5;
+            hunger -= 5;
+            thirst -= 5;
+            fatigue += 10;
+            updateStats();
+            document.getElementById('narrative').innerHTML += "<p>Вы собрали дрова. Голод и жажда увеличились, усталость уменьшилась.</p>";
+        }
+
+        function gatherStones() {
+            stones += 3;
+            hunger -= 5;
+            thirst -= 5;
+            fatigue += 10;
+            updateStats();
+            document.getElementById('narrative').innerHTML += "<p>Вы собрали камни. Голод и жажда увеличились, усталость уменьшилась.</p>";
+        }
+
+        function gatherBerries() {
+            berries += 5;
+            hunger -= 5;
+            thirst -= 5;
+            fatigue += 10;
+            updateStats();
+            document.getElementById('narrative').innerHTML += "<p>Вы собрали ягоды. Голод и жажда увеличились, усталость уменьшилась.</p>";
+        }
+
+        function fish() {
+            if (wood >= 2 && stones >= 1) {
+                fish += 3;
+                wood -= 2;
+                stones -= 1;
+                hunger -= 10;
+                thirst += 5;
+                fatigue += 10;
+                updateStats();
+                document.getElementById('narrative').innerHTML += "<p>Вы поймали рыбу. Голод уменьшился, но усталость и жажда увеличились.</p>";
+            } else {
+                document.getElementById('narrative').innerHTML += "<p>У вас недостаточно материалов для создания удочки.</p>";
+            }
+        }
+
+        function makeFire() {
+            if (wood >= 5) {
+                wood -= 5;
+                hunger -= 10;
+                thirst += 5;
+                fatigue -= 10;
+                updateStats();
+                document.getElementById('narrative').innerHTML += "<p>Вы развели костер. Голод уменьшился, усталость уменьшилась, но жажда увеличилась.</p>";
+            } else {
+                document.getElementById('narrative').innerHTML += "<p>У вас недостаточно дров, чтобы развести костер.</p>";
+            }
+        }
+
+        function rest() {
+            fatigue -= 20;
+            hunger += 10;
+            thirst += 10;
+            updateStats();
+            document.getElementById('narrative').innerHTML += "<p>Вы отдохнули. Усталость уменьшилась, но голод и жажда увеличились.</p>";
+        }
+
+        function eatBerries() {
+            if (berries > 0) {
+                berries -= 1;
+                hunger += 15;
+                health += 5;
+                updateStats();
+                document.getElementById('narrative').innerHTML += "<p>Вы съели ягоды. Голод уменьшился, здоровье улучшилось.</p>";
+            } else {
+                document.getElementById('narrative').innerHTML += "<p>У вас нет ягод.</p>";
+            }
+        }
+
+        function eatFish() {
+            if (fish > 0) {
+                fish -= 1;
+                hunger += 20;
+                health += 10;
+                updateStats();
+                document.getElementById('narrative').innerHTML += "<p>Вы съели рыбу. Голод уменьшился, здоровье улучшилось.</p>";
+            } else {
+                document.getElementById('narrative').innerHTML += "<p>У вас нет рыбы.</p>";
+            }
+        }
+
+        updateStats();
+    </script>
+</body>
+</html>
